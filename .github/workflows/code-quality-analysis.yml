@@ -34,10 +34,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run SonarQube Analysis
+        uses: SonarSource/sonarcloud-github-action@master
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Store your SonarQube token in GitHub Secrets
-        run: |
-          sonar-scanner \
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          run: |
+            sonar-scanner \
             -Dsonar.organization=sandali95
             -Dsonar.projectKey=sandali95_chapter10
             -Dsonar.sources=. \
